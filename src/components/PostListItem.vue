@@ -56,6 +56,8 @@ tr {
 
   cursor: pointer;
 
+  background-color: #c0c0c0;
+
   transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1),
     color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 

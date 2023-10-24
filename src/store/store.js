@@ -32,6 +32,10 @@ export default createStore({
     setQuery(state, data) {
       state.query = data;
     },
+
+    emptyUser(state) {
+      state.user = [];
+    },
   },
 
   actions: {
@@ -63,6 +67,10 @@ export default createStore({
 
     setQuery({ commit }, data) {
       commit("setQuery", data);
+    },
+
+    emptyUser({ commit }) {
+      commit("emptyUser");
     },
   },
 });
