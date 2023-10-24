@@ -1,12 +1,6 @@
 <template>
   <table class="list" v-if="users.length > 0">
-    <PostListItem
-      v-for="user in users"
-      :key="user.id"
-      :user="user"
-      @remove="$emit('remove', user)"
-      @titleClick="$emit('titleClick', user)"
-    />
+    <PostListItem v-for="user in users" :key="user.id" :user="user" />
   </table>
   <p v-else>Not Found</p>
 </template>

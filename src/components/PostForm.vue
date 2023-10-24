@@ -3,8 +3,8 @@
     <input
       name="name"
       type="text"
-      :value="search"
-      @input="$emit('update:search', $event.target.value)"
+      :value="query"
+      @input="setQuery($event.target.value.trim())"
       placeholder="Введите имя машині"
       class="searchbar"
     />
@@ -12,12 +12,17 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
-  props: {
-    search: {
-      type: String,
-      required: true,
-    },
+  computed: {
+    ...mapState({ query: "query" }),
+  },
+
+  methods: {
+    ...mapActions({
+      setQuery: "setQuery",
+    }),
   },
 };
 </script>

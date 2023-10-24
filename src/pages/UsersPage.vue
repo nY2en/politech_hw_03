@@ -1,16 +1,13 @@
 <template>
   <h1 class="title">Users</h1>
-  <p class="sub-title">{{ users.length }}</p>
+  <p class="sub-title">{{ filteredUsers.length }}</p>
 
-  <PostForm v-model:search.trim="query" />
-  <PostList
-    :users="filteredUsers"
-    @remove="handleBtnDeleteClick"
-    @titleClick="handleTitleClick"
-  />
+  <PostForm />
+  <PostList :users="filteredUsers" />
 </template>
 
 <script>
+import { mapActions, mapState, mapGetters } from "vuex";
 import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
 
@@ -20,29 +17,16 @@ export default {
     PostForm,
   },
 
-  data() {
-    return {
-      users: [],
-      query: "",
-    };
-  },
-
   mounted() {
-    if (
-      !JSON.parse(localStorage.getItem("users")) ||
-      !JSON.parse(localStorage.getItem("users")).length
-    ) {
-      fetch("https://pokeapi.co/api/v2/pokemon")
-        .then((r) => r.json())
-        .then((data) => {
-          console.log(data.results);
-          data.results.forEach((el, index) => (el.id = index += 1));
-          this.users = data.results;
-        });
+    const lsUsers = JSON.parse(localStorage.getItem("users"));
+
+    if (!lsUsers || !lsUsers.length) {
+      this.fetchUsers();
+
       return;
     }
 
-    this.users = JSON.parse(localStorage.getItem("users"));
+    this.setUsers(lsUsers);
   },
 
   watch: {
@@ -54,20 +38,20 @@ export default {
   },
 
   computed: {
-    filteredUsers() {
-      return this.users.filter((el) =>
-        el.name.toLowerCase().includes(this.query.toLowerCase())
-      );
-    },
+    ...mapState({
+      users: "users",
+    }),
+
+    ...mapGetters({
+      filteredUsers: "filteredUsers",
+    }),
   },
 
   methods: {
-    handleBtnDeleteClick(post) {
-      this.users = this.users.filter((el) => el.id !== post.id);
-    },
-    handleTitleClick(post) {
-      this.query = post.name;
-    },
+    ...mapActions({
+      fetchUsers: "fetchUsers",
+      setUsers: "setUsers",
+    }),
   },
 };
 </script>

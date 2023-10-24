@@ -1,11 +1,10 @@
 <template>
   <tr>
-    <td class="table__title" @click="$emit('titleClick', user)">
+    <td class="table__title">
       {{ user.name }}
     </td>
     <td>{{ user.url }}</td>
     <td>
-      <button class="table__btn" @click="$emit('remove', user)">Delete</button>
       <button class="table__btn" @click="$router.push(`/user/${user.id}`)">
         More Info
       </button>
