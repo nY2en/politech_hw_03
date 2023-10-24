@@ -1,15 +1,15 @@
 <template>
   <table class="list" v-if="users.length > 0">
-    <PostListItem v-for="user in users" :key="user.id" :user="user" />
+    <UserListItem v-for="user in users" :key="user.id" :user="user" />
   </table>
   <p v-else>Not Found</p>
 </template>
 
 <script>
-import PostListItem from "./PostListItem.vue";
+import UserListItem from "./UserListItem.vue";
 export default {
   components: {
-    PostListItem,
+    UserListItem,
   },
 
   props: {

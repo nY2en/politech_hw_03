@@ -2,19 +2,19 @@
   <h1 class="title">Users</h1>
   <p class="sub-title">{{ filteredUsers.length }}</p>
 
-  <PostForm />
-  <PostList :users="filteredUsers" />
+  <UserForm />
+  <UserList :users="filteredUsers" />
 </template>
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
-import PostForm from "@/components/PostForm.vue";
-import PostList from "@/components/PostList.vue";
+import UserForm from "@/components/UserForm.vue";
+import UserList from "@/components/UserList.vue";
 
 export default {
   components: {
-    PostList,
-    PostForm,
+    UserForm,
+    UserList,
   },
 
   mounted() {
@@ -56,7 +56,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .title {
   margin-bottom: 8px;
 
