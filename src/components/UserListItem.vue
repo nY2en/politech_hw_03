@@ -1,9 +1,13 @@
 <template>
   <tr>
+    <img
+      :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${user.id}.png`"
+    />
+
     <td class="table__title">
       {{ user.name }}
     </td>
-    <td>{{ user.url }}</td>
+    <!-- <td>{{ user.url }}</td> -->
     <td>
       <button class="table__btn" @click="$router.push(`/user/${user.id}`)">
         More Info
